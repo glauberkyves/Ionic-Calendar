@@ -442,51 +442,63 @@ angular.module('ui.rCalendar', [])
                     var views = scope.views,
                         dates,
                         r;
-                    if (views) {
-                        dates = views[scope.currentViewIndex].dates;
-                        var currentCalendarDate = ctrl.currentCalendarDate;
-                        var currentMonth = currentCalendarDate.getMonth();
-                        var currentYear = currentCalendarDate.getFullYear();
-                        var selectedMonth = selectedDate.getMonth();
-                        var selectedYear = selectedDate.getFullYear();
-                        var direction = 0;
-                        if (currentYear === selectedYear) {
-                            if (currentMonth !== selectedMonth) {
-                                direction = currentMonth < selectedMonth ? 1 : -1;
-                            }
-                        } else {
-                            direction = currentYear < selectedYear ? 1 : -1;
-                        }
+                    var currentDate = new Date()
 
-                        ctrl.currentCalendarDate = selectedDate;
-                        if (direction === 0) {
+                    if(selectedDate.getTime() < currentDate.getTime()){
+
+                    }else{
+                        if (views) {
+                            dates = views[scope.currentViewIndex].dates;
+                            var currentCalendarDate = ctrl.currentCalendarDate;
+                            var currentMonth = currentCalendarDate.getMonth();
+                            var currentYear = currentCalendarDate.getFullYear();
+                            var selectedMonth = selectedDate.getMonth();
+                            var selectedYear = selectedDate.getFullYear();
+                            var direction = 0;
+                            if (currentYear === selectedYear) {
+                                if (currentMonth !== selectedMonth) {
+                                    direction = currentMonth < selectedMonth ? 1 : -1;
+                                }
+                            } else {
+                                direction = currentYear < selectedYear ? 1 : -1;
+                            }
+
                             ctrl.currentCalendarDate = selectedDate;
-                            if (ngModelCtrl) {
-                                ngModelCtrl.$setViewValue(selectedDate);
-                            }
-                            var currentViewStartDate = ctrl.range.startTime,
-                                oneDay = 86400000,
-                                selectedDayDifference = Math.floor((selectedDate.getTime() - currentViewStartDate.getTime()) / oneDay);
-                            for (r = 0; r < 42; r += 1) {
-                                dates[r].selected = false;
+                            if (direction === 0) {
+                                ctrl.currentCalendarDate = selectedDate;
+                                if (ngModelCtrl) {
+                                    ngModelCtrl.$setViewValue(selectedDate);
+                                }
+                                var currentViewStartDate = ctrl.range.startTime,
+                                    oneDay = 86400000,
+                                    selectedDayDifference = Math.floor((selectedDate.getTime() - currentViewStartDate.getTime()) / oneDay);
+                                for (r = 0; r < 42; r += 1) {
+                                    dates[r].selected = false;
+                                }
+
+                                if (selectedDayDifference >= 0 && selectedDayDifference < 42) {
+                                    dates[selectedDayDifference].selected = true;
+                                    scope.selectedDate = dates[selectedDayDifference];
+                                }
+                            } else {
+                                ctrl.moveOnSelected = true;
+                                ctrl.slideView(direction);
                             }
 
-                            if (selectedDayDifference >= 0 && selectedDayDifference < 42) {
-                                dates[selectedDayDifference].selected = true;
-                                scope.selectedDate = dates[selectedDayDifference];
+                            if (scope.timeSelected) {
+                                scope.timeSelected({selectedTime: selectedDate});
                             }
-                        } else {
-                            ctrl.moveOnSelected = true;
-                            ctrl.slideView(direction);
-                        }
-
-                        if (scope.timeSelected) {
-                            scope.timeSelected({selectedTime: selectedDate});
                         }
                     }
                 };
 
                 scope.getHighlightClass = function (date) {
+                    var currentDate = new Date()
+
+                    if(date.date.getTime() < currentDate.getTime()){
+                        return  'disabled'
+                    }
+
                     var className = '';
                     if (date.selected) {
                         className = 'monthview-selected';
