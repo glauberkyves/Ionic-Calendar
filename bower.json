@@ -1,0 +1,29 @@
+{
+  "name": "Ionic-Calendar-Biz",
+  "homepage": "https://github.com/glauberkyves/Ionic-Calendar",
+  "authors": [
+    "Glauber Kyves <glauberkyves@gmail.com>"
+  ],
+  "description": "A calendar directive for Ionic framework",
+    "main": [
+        "dist/css/calendar.css",
+        "dist/js/calendar-tpls.js"
+    ],
+    "keywords": [
+        "ionic",
+        "calendar"
+    ],
+    "dependencies": {
+        "ionic": "~1.1.1"
+    },
+    "license": "MIT",
+    "ignore": [
+        "lib/",
+        "css/",
+        "src/",
+        "template/",
+        ".jshintrc",
+        "gruntfile.js",
+        "package.json"
+    ]
+}
