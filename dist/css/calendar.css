@@ -35,6 +35,7 @@
     padding: 8px;
     line-height: 1.428571429;
     vertical-align: top;
+    border-top: 1px solid #ddd;
 }
 
 .table > thead > tr > th {
@@ -89,9 +90,13 @@
     padding-top: 5px;
 }
 
-.calendar-hour-column {
+.calendar-hour-column, .calendar-week-column {
     width: 50px;
     white-space: nowrap;
+}
+
+.calendar-navbar {
+    margin-bottom: 5px;
 }
 
 .calendar-event-wrap {
@@ -160,21 +165,18 @@
     line-height: 50px;
     text-align: center;
     width: 50px;
+    border: 1px solid #ddd;
+    border-right-width: 0;
 }
 
 .weekview-allday-content-wrapper, .dayview-allday-content-wrapper {
     margin-left: 50px;
     overflow: hidden;
-    height: 51px;
+    height: 100%;
 }
 
 .weekview-allday-content-table, .dayview-allday-content-table {
-    min-height: 50px;
-}
-
-.weekview-allday-content-table td, .dayview-allday-content-table td {
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    height: 50px;
 }
 
 .monthview-slide {
@@ -192,39 +194,30 @@
 
 .weekview-allday-table, .dayview-allday-table {
     height: 50px;
-    position: relative;
-    border-bottom: 1px solid #ddd;
 }
 
 .weekview-normal-event-container {
     margin-top: 87px;
-    overflow: hidden;
 }
 
 .dayview-normal-event-container {
     margin-top: 47px;
-    overflow: hidden;
 }
 
 @media (max-width: 750px) {
-    .weekview-allday-label, .dayview-allday-label, .calendar-hour-column {
-        width: 31px;
-        font-size: 12px;
-    }
-
-    .weekview-allday-label, .dayview-allday-label {
-        padding-top: 4px;
+    .weekview-allday-label, .dayview-allday-label, .calendar-hour-column, .calendar-week-column {
+        width: 30px;
+        font-size: 14px;
     }
 
     .weekview-normal-event-container {
-        margin-top: 83px;
+        margin-top: 82px;
     }
 
     .table > tbody > tr > td.calendar-hour-column {
         padding-left: 0;
         padding-right: 0;
-        vertical-align: middle;
-        line-height: 12px;
+        font-size: 12px;
     }
 
     .table > thead > tr > th.weekview-header {
@@ -238,7 +231,7 @@
     }
 
     .weekview-allday-content-wrapper, .dayview-allday-content-wrapper {
-        margin-left: 31px;
+        margin-left: 28px;
     }
 
     .calendar-event-inner {
